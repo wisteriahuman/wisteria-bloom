@@ -5,4 +5,4 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "8000:8000"
-    command: poetry run python manage.py runserver
+    command: poetry run python manage.py runserver 0.0.0.0:8000
