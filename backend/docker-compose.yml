@@ -6,3 +6,10 @@ services:
     ports:
       - "8000:8000"
     command: poetry run python manage.py runserver 0.0.0.0:8000
+    networks:
+      - wisteria-network
+
+
+networks:
+  wisteria-network:
+    external: true
