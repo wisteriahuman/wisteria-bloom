@@ -30,6 +30,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "0.0.0.0",
     "django-app",
+    "wisteria-bloom-production.up.railway.app",
 ]
 
 
