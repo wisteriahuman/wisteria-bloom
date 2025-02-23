@@ -23,7 +23,7 @@ export default function RandomContestCard({
     const handleClick = () => {
         setFlag(true);
         onClick();
-        setTimeout(() => setFlag(false), 300);
+        setTimeout(() => setFlag(false), 2000);
     };
 
     return (
@@ -43,31 +43,36 @@ export default function RandomContestCard({
                     className={`
                         item-center justify-center
                         relative inline-flex items-center px-12 py-3
-                        overflow-hidden text-lg font-medium text-indigo-600
+                        overflow-hidden text-lg font-medium
                         border-2 border-indigo-600 rounded-full
-                        hover:text-white group hover:bg-gray-50
+                        ${flag ? "bg-gray-50 text-white" : "text-indigo-600 hover:text-white group hover:bg-gray-50"}
                     `}
                     onClick={handleClick}
                 >
                     {/*ホバー時のアニメーション*/}
                     <span className={`
-                        absolute left-0 block w-full h-0 transition-all bg-indigo-600
-                        opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease
+                        absolute left-0 block w-full transition-all bg-indigo-600
+                        opacity-100 group-hover:h-full group-hover:top-0 duration-400 ease
+                        ${flag ? "h-full top-0" : "h-0 top-1/2"}
                     `}></span>
                     {/*クリック時のアニメーション*/}
                     <span className={`
-                        absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full
+                        absolute transition-all duration-300 ease-out bg-white rounded-full
                         ${flag ? "w-44 h-44 opacity-10" : "w-0 h-0 opacity-0"}
                     `}></span>
                     <span className="relative">参加する</span>
                     <span className={`
                         absolute right-0 flex items-center justify-start
-                        w-10 n-10 duration-300 transform translate-x-full
+                        w-10 n-10 duration-300 transform
                         group-hover:translate-x-0 ease
+                        ${flag ? "translate-x-0": "translate-x-full"}
                     `}>
                         <Image
                             alt="icon"
-                            className="size-5 rtl:rotate-180 group-hover:invert"
+                            className={`
+                                size-5 rtl:rotate-180
+                                ${flag ? "invert": "group-hover:invert"}
+                            `}
                             src="/images/arrow-right-circle.svg"
                             width={24}
                             height={24}
