@@ -1,1 +1,1 @@
-export const SERVERURL = "http://django-app:8000/";
+export const SERVERURL = "http://wisteria-bloom-production.up.railway.app/";

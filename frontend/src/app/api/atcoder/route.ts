@@ -9,11 +9,11 @@ export async function GET() {
                 'Content-Type': 'application/json'
             },
         });
-        const url = await res.json();
+        const data = await res.json();
 
         return NextResponse.json({
             status: 200,
-            url: url
+            url: data.url
         });
     } catch (error) {
         console.error('Error fetching data:', error);
