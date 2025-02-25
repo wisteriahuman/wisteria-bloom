@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'atcoder.apps.AtcoderConfig',
+    'search.apps.SearchConfig',
     'rest_framework',
     'corsheaders',
 ]
