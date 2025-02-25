@@ -1,4 +1,6 @@
+import "@/app/globals.css";
 import Spinner from '@/components/spinner/Spinner';
+
 
 export default function Loading() {
     return (
@@ -6,5 +8,5 @@ export default function Loading() {
             <Spinner />
             <h1>Loading...</h1>
         </div>
-    )
+    );
 }

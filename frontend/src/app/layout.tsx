@@ -1,4 +1,6 @@
 import React from 'react';
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,9 +11,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <title>Wisteria Bloom</title>
       </head>
       <body className="bg-gray-100">
-        <header>Wisteria Bloom</header>
+        <Header />
         <main className="relative min-h-screen">
-          <div className="absolute inset-0 bg-gray-400 overflow-hidden flex items-center">
+          <div className="absolute inset-0 bg-gray-400 overflow-hidden flex items-center -z-50">
             <div className="w-screen h-64 absolute top-0 opacity-50 left-0 -my-40 -mx-64 bg-gray-300 rounded-full"></div>
             <div className="w-64 h-64 -mx-32 bg-gray-300 opacity-50 rounded-full"></div>
             <div className="w-64 h-64 ml-auto relative opacity-50 -mr-32 bg-gray-300 rounded-full"></div>
@@ -19,7 +21,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
           {children}
         </main>
-        <footer>©Wisteria Bloom</footer>
+        <Footer />
       </body>
     </html>
   )

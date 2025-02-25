@@ -1,14 +1,27 @@
 "use client";
 
 import "@/app/globals.css";
-import { useState } from "react"
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import RandomContestCard from "@/components/atcoder/RandomContestCard";
 import Spinner from "@/components/spinner/Spinner";
 
 export default function AtCoderPage() {
-    const router = useRouter();
     const [flag, setFlag] = useState(false);
+    const [isClosedDoor, setIsClosedDoor] = useState(true);
+    const [isCracked, setIsCracked] = useState(false);
+
+    useEffect(() => {
+        const crackTimer = setTimeout(() => {
+            setIsCracked(true);
+        }, 500);
+        const doorTimer = setTimeout(() => {
+            setIsClosedDoor(false);
+        }, 1300);
+        return () => {
+            clearTimeout(crackTimer);
+            clearTimeout(doorTimer);
+        };
+    }, []);
 
     const handleRandomContestClick = async (FETCHURL: string) => {
         try {
@@ -21,7 +34,7 @@ export default function AtCoderPage() {
             });
             const data = await res.json();
             if (data.url) {
-                router.push(data.url);
+                window.open(data.url, "_blank");
                 setTimeout(() => setFlag(false), 200);
             }
         } catch (error) {
@@ -31,9 +44,25 @@ export default function AtCoderPage() {
 
     return (
         <section className="relative text-groy-600 body-font">
-            <div className="container px-5 py-24 mx-auto">
+            <span className={`
+                absolute left-0 top-0 h-full w-1/2 bg-indigo-950 z-50
+                transform origin-left transition-transform duration-500
+                ${isClosedDoor ? "scale-x-100" : "scale-x-0"}
+            `}></span>
+            <span className={`
+                absolute right-0 top-0 h-full w-1/2 bg-indigo-950 z-50
+                transform origin-right transition-transform duration-500
+                ${isClosedDoor ? "scale-x-100" : "scale-x-0"}
+            `}></span>
+            <span className={`
+                absolute left-1/2 top-0 w-1 bg-yellow-50 z-50
+                transform origin-center transition-all duration-500
+                ${isClosedDoor ? "duration-1000" : "duration-75"}
+                ${isCracked && isClosedDoor ? "h-full": "h-0"}
+            `}></span>
+            <div className="container px-5 py-24 mx-auto z-10">
                 <div className="flex flex-col text-center w-full mb-20">
-                    <h1 className="text-2xl font-medium title-font mb-4 text-white tracking-widest">AtCoder Random Contest</h1>
+                    <h1 className="text-2xl font-medium title-font mb-4 text-white tracking-widest relative z-50">AtCoder Random Contest</h1>
                     <div className="lg:w-2/3 mx-auto leading-reloxed text-base text-white">
                         <p>AtCoder Random Contest へようこそ！</p>
                         <p>下記の中からお好みのランダムコンテストに参加してください</p>

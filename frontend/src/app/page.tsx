@@ -1,7 +1,17 @@
+
+
+import "@/app/globals.css";
+import Image from "next/image";
+
 export default function Home() {
   return (
-    <div>
-        <h1>Hello World!</h1>
-    </div>
+    <section>
+      <Image
+        src="/images/wisteria_bloom.svg"
+        alt="wisteria_bloom"
+        width={1000}
+        height={500}
+      />
+    </section>
   );
 }
