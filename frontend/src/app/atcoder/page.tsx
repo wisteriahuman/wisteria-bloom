@@ -2,7 +2,7 @@
 
 import "@/app/globals.css";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import RandomContestCard from "@/components/atcoder/RandomContestCard";
 import Spinner from "@/components/spinner/Spinner";
 
