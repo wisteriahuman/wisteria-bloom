@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://wisteria-bloom.wisteria-io.com
+
+# Sitemaps
+Sitemap: https://wisteria-bloom.wisteria-io.com/sitemap.xml
