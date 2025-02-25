@@ -46,7 +46,7 @@ export default function Header() {
                     <div className="!visible hidden grow items-center lg:!flex">
                         <ul className="list-none p-0 flex flex-row items-center gap-8">
                             <li>
-                                <Link href="/" className="flex item-center text-sm border-transparent font-semibold border-b-4 hover:border-border-brand-active pb-2 ease-in-out">Home</Link>
+                                <Link href="/" className="flex item-center text-sm border-transparent font-semibold border-b-4 hover:border-border-brand-active pb-2 ease-in-out hover:underline">Home</Link>
                             </li>
                             <li>
                                 <div className="dropdown inline-block relative" ref={dropdownRef}>
@@ -56,7 +56,7 @@ export default function Header() {
                                         className="w-max"
                                         onClick={() => setIsDropdownOpen(prev => !prev)}
                                     >
-                                        <div className="text-sm border-transparent font-semibold border-b-4 hover:border-border-brand-active pb-2 ease-in-out">
+                                        <div className={`text-sm border-transparent font-semibold border-b-4 hover:border-border-brand-active pb-2 ease-in-out ${isDropdownOpen ? "underline text-indigo-400" : "hover:underline"}`}>
                                             <span>Courses</span>
                                         </div>
                                     </button>
