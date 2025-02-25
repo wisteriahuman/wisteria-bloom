@@ -2,6 +2,7 @@
 
 import "@/app/globals.css";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import RandomContestCard from "@/components/atcoder/RandomContestCard";
 import Spinner from "@/components/spinner/Spinner";
 
@@ -9,6 +10,7 @@ export default function AtCoderPage() {
     const [flag, setFlag] = useState(false);
     const [isClosedDoor, setIsClosedDoor] = useState(true);
     const [isCracked, setIsCracked] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         const crackTimer = setTimeout(() => {
@@ -34,7 +36,7 @@ export default function AtCoderPage() {
             });
             const data = await res.json();
             if (data.url) {
-                window.open(data.url, "_blank");
+                router.push(data.url);
                 setTimeout(() => setFlag(false), 200);
             }
         } catch (error) {
