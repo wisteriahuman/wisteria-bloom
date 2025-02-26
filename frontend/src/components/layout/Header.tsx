@@ -1,38 +1,28 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
 
 export default function Header() {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const dropdownRef = useRef<HTMLDivElement>(null);
+    const [isCoursesOpen, setIsCoursesOpen] = useState(false);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [isCoursesInDrawerOpen, setIsCoursesInDrawerOpen] = useState(false);
     const router = useRouter();
     const [searchQuery, setSearchQuery] = useState("");
-
-    useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-                setIsDropdownOpen(false);
-            }
-        }
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        }
-    }, [dropdownRef]);
 
 
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (searchQuery.trim() == "") return;
         router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+        setSearchQuery("");
     };
 
     return (
-        <header className="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[60] w-full bg-white border-b text-sm py-2.5 dark:bg-neutral-800 dark:border-neutral-700">
+        <header className="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[60] w-full bg-white border-b text-sm py-2.5">
             <nav className="px-4 sm:px-6 flex basis-full items-center w-full mx-auto">
                 <div className="mr-5 flex items-center">
                     <Image
@@ -42,35 +32,37 @@ export default function Header() {
                         height={50}
                     />
                 </div>
-                <div className="hidden lg:flex relative self-end pb-3 w-full items-center justify-between grow max-w-[10rem]">
+                <div className="hidden lg:flex relative self-end pb-1 w-full items-center justify-between grow max-w-[10rem]">
                     <div className="!visible hidden grow items-center lg:!flex">
-                        <ul className="list-none p-0 flex flex-row items-center gap-8">
+                        <ul className="text-xl list-none p-0 flex flex-row items-center gap-8">
                             <li>
-                                <Link href="/" className="flex item-center text-sm border-transparent font-semibold border-b-4 hover:border-border-brand-active pb-2 ease-in-out hover:underline">Home</Link>
+                                <Link href="/" className="flex item-center border-transparent font-semibold border-b-4 hover:border-border-brand-active pb-2 ease-in-out hover:underline">Home</Link>
                             </li>
                             <li>
-                                <div className="dropdown inline-block relative" ref={dropdownRef}>
-                                    <button
-                                        id="courses-btn"
-                                        name="courses-btn"
+                                <button
+                                    className="dropdown inline-block relative"
+                                    onMouseEnter={() => setIsCoursesOpen(true)}
+                                    onMouseLeave={() => setIsCoursesOpen(false)}
+                                    onClick={() => setIsCoursesOpen(prev => !prev)}
+                                >
+                                    <div
                                         className="w-max"
-                                        onClick={() => setIsDropdownOpen(prev => !prev)}
                                     >
-                                        <div className={`text-sm border-transparent font-semibold border-b-4 hover:border-border-brand-active pb-2 ease-in-out ${isDropdownOpen ? "underline text-indigo-400" : "hover:underline"}`}>
+                                        <div className={`border-transparent font-semibold border-b-4 hover:border-border-brand-active pb-2 ease-in-out ${isCoursesOpen ? "underline text-indigo-400" : "hover:underline"}`}>
                                             <span>Courses</span>
                                         </div>
-                                    </button>
-                                    <ul className={`dropdown-content absolute left-0 right-0 z-[1000] mt-0 rounded-md w-max border-none bg-white bg-clip-padding shadow-lg ${isDropdownOpen ? "" : "hidden"}`}>
+                                    </div>
+                                    <ul className={`dropdown-content absolute left-0 right-0 z-[1000] mt-0 rounded-md w-max border-none bg-white bg-clip-padding shadow-lg ${isCoursesOpen ? "" : "hidden"}`}>
                                         <li className="dropdown">
-                                            <a className="w-52 no-underline flex items-center hover:text-accent py-3 px-4" href="/atcoder">AtCoder</a>
+                                            <Link className="w-52 no-underline flex items-center hover:text-accent py-3 px-4 hover:underline" href="/atcoder">AtCoder</Link>
                                         </li>
                                     </ul>
-                                </div>
+                                </button>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div className="w-full flex items-center justify-end ml-auto md:justify-between gap-x-1 md:gap-x-3">
+                <div className="w-full flex items-center pl-0 lg:pl-16 justify-end ml-auto md:justify-between md:gap-x-3">
                     <div className="md:block">
                         <form className="relative" onSubmit={handleSearch}>
                             <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 ps-3.5">
@@ -83,13 +75,78 @@ export default function Header() {
                             </div>
                             <input
                                 type="text"
-                                className="py-2 ps-10 pr-16 block w-full bg-gray-50 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-600"
+                                className="py-2 ps-10 pr-16 block w-full bg-gray-100 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-600"
                                 placeholder="Search..."
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
                         </form>
                     </div>
                 </div>
+
+                <div className="p-1">
+                    <button onClick={() => setIsDrawerOpen(prev => !prev)} className="p-1 lg:p-2 rounded-full hover:bg-gray-100 active:bg-gray-200">
+                        <Image
+                            alt="menu"
+                            src="/images/burger-menu.svg"
+                            width={60}
+                            height={60}
+                        />
+                    </button>
+                </div>
+            </nav>
+            <nav 
+                className={`fixed top-0 right-0 z-40 h-screen p-4 overflow-y-autotransition-transform duration-200 bg-white w-64
+                    ${isDrawerOpen ? "translate-x-0" : "translate-x-full"}
+                    `}>
+                    <h5 className="text-xl p-1 font-semibold text-gray-500 uppercase">Menu</h5>
+                    <button
+                        className="absolute top-4 right-4 p-1 rounded-full hover:bg-gray-100 active:bg-gray-200"
+                        onClick={() => setIsDrawerOpen(false)}
+                    >
+                        <Image
+                            alt="close"
+                            src="/images/cross.svg"
+                            width={24}
+                            height={24}
+                        />
+                    </button>
+                    <div className="py-4 overflow-y-auto">
+                        <ul className="space-y-2 font-medium text-3xl">
+                            <li className="pb-1 border-b-2 border-black">
+                                <Link href="/" className="hover:underline font-semibold">Home</Link>
+                            </li>
+                            <li className="pb-1 border-b-2 border-black">
+                                <button
+                                    className=""
+                                    onClick={() => setIsCoursesInDrawerOpen(prev => !prev)}
+                                    >
+                                    <div className="flex items-center justify-between font-semibold">
+                                        <span>Courses</span>
+                                        <Image
+                                            alt="arrow"
+                                            src="/images/arrow-left.svg"
+                                            className={`
+                                                pl-2 transition-transform duration-200
+                                                ${isCoursesInDrawerOpen ? "-rotate-90 translate-y-2 translate-x-2" : "rotate-0"}
+                                                `}
+                                            width={30}
+                                            height={30}
+                                        />
+                                    </div>
+                                </button>
+                                <ul className={`
+                                        overflow-hidden text-xl
+                                        ${isCoursesInDrawerOpen ? "max-h-40" : "max-h-0"}
+                                    `}>
+                                    <li
+                                        className="pl-4 border-l-2 border-black"
+                                    >
+                                        <Link href="/atcoder" className="hover:underline">AtCoder</Link>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
             </nav>
         </header>
     );
