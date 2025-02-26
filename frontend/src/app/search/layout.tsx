@@ -6,7 +6,6 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
     title: "Wisteria Bloom | 検索結果",
     description: "Wisteria Bloomの検索結果ページです。",
-    viewport: "width=device-width, initial-scale=1.0",
     openGraph: {
         title: "Wisteria Bloom | 検索結果",
         description: "Wisteria Bloomの検索結果ページです。",
@@ -16,6 +15,8 @@ export const metadata: Metadata = {
     },
     robots: "noindex, nosnippet",
 };
+
+export const viewport = "width=device-width, initial-scale=1.0";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {

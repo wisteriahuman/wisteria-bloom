@@ -9,7 +9,6 @@ export const metadata: Metadata = {
   Wisteria BloomはWisteriaの個人サイトです。
   学習者向けの学習ツールやリソースも提供しています。
   `.trim(),
-  viewport: "width=device-width, initial-scale=1.0",
   openGraph: {
     title: "Wisteria Bloom",
     description: `
@@ -21,6 +20,8 @@ export const metadata: Metadata = {
     images: ["/images/wisteria_bloom.svg"],
   }
 }
+
+export const viewport = "width=device-width, initial-scale=1.0";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
