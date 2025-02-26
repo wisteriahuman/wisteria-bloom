@@ -75,7 +75,7 @@ export default function Header() {
                             </div>
                             <input
                                 type="text"
-                                className="py-2 ps-10 pr-16 block w-full bg-gray-100 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-600"
+                                className="py-2 ps-10 pr-16 block w-full bg-gray-100 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                                 placeholder="Search..."
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
