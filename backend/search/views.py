@@ -12,7 +12,7 @@ class AllPagesView(APIView):
 
 class SearchQueryPagesView(APIView):
     def get(self, request):
-        query = request.query_params.get("q")
+        query = request.query_params.get("q").strip()
         pages = Page.objects.filter(
             Q(title__icontains=query) | Q(tags__icontains=query) | Q(description__icontains=query)
         )
