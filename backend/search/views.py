@@ -12,9 +12,14 @@ class AllPagesView(APIView):
 
 class SearchQueryPagesView(APIView):
     def get(self, request):
-        query = request.query_params.get("q").strip()
-        pages = Page.objects.filter(
-            Q(title__icontains=query) | Q(tags__icontains=query) | Q(description__icontains=query)
-        )
+        query = request.query_params.get("q", "").strip().split()
+        q_objects = Q()
+        for term in query:
+            q_objects &= (
+                Q(title__icontains=term) |
+                Q(tags__icontains=term) |
+                Q(description__icontains=term)
+            )
+        pages = Page.objects.filter(q_objects)
         serializer = PageSerializer(pages, many=True)
         return Response(serializer.data)
