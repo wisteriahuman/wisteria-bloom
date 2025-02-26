@@ -4,7 +4,13 @@ import "@/app/globals.css";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Spinner from "@/components/spinner/Spinner";
+import type { Metadata } from "next";
 
+
+export const metadata: Metadata = {
+    title: "検索結果",
+    description: "Wisteria Bloomの検索結果ページです。",
+};
 interface SearchResult {
     title: string;
     tags: string;
