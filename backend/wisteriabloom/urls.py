@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/atcoder/', include('atcoder.urls')),
     path('api/pages/', include('search.urls')),
+    path('api/pixel-alchemy/', include('pixelalchemy.urls')),
 ]
