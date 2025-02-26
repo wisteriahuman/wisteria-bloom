@@ -29,6 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html lang="ja">
       <head>
         <meta charSet="UTF-8" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className="bg-gray-100">
         <Header />
