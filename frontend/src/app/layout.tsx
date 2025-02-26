@@ -1,14 +1,33 @@
 import React from 'react';
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Wisteria Bloom",
+  description: `
+  Wisteria BloomはWisteriaの個人サイトです。
+  学習者向けの学習ツールやリソースも提供しています。
+  `.trim(),
+  viewport: "width=device-width, initial-scale=1.0",
+  openGraph: {
+    title: "Wisteria Bloom",
+    description: `
+    Wisteria BloomはWisteriaの個人サイトです。
+    学習者向けの学習ツールやリソースも提供しています。
+    `.trim(),
+    siteName: "Wisteria Bloom",
+    type: "website",
+    images: ["/images/wisteria_bloom.svg"],
+  }
+}
+
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Wisteria Bloom</title>
+        <meta charSet="UTF-8" />
       </head>
       <body className="bg-gray-100">
         <Header />

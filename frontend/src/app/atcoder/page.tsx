@@ -1,16 +1,10 @@
 "use client";
 
-import type { Metadata } from "next";
 import "@/app/globals.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import RandomContestCard from "@/components/atcoder/RandomContestCard";
 import Spinner from "@/components/spinner/Spinner";
-
-export const metadata: Metadata = {
-    title: "AtCoder Random Contest",
-    description: "AtCoder Random Contest にようこそ！AtCoder Beginner Contest の過去問題をランダムに解くことができます",
-};
 
 export default function AtCoderPage() {
     const [flag, setFlag] = useState(false);
