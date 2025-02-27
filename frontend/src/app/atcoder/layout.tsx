@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "AtCoder Random Contest",
         description: "AtCoder Random Contest にようこそ！AtCoder Beginner Contest の過去問題をランダムに解くことができます",
-        siteName: "AtCoder Random Contest",
+        siteName: "Wisteria Bloom",
         type: "website",
         images: ["/images/wisteria-bloom.svg"],
     },

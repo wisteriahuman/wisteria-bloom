@@ -64,8 +64,10 @@ export default function AtCoderPage() {
             `}></span>
             <div className="container px-5 py-24 mx-auto z-10">
                 <div className="flex flex-col text-center w-full mb-20">
-                    <h1 className="text-2xl font-medium title-font mb-4 text-white tracking-widest relative z-50">AtCoder Random Contest</h1>
-                    <div className="lg:w-2/3 mx-auto leading-reloxed text-base text-white">
+                    <h1 className="text-5xl font-medium title-font mb-4 text-white tracking-widest relative z-50">
+                        AtCoder Random Contest
+                    </h1>
+                    <div className="lg:w-2/3 mx-auto leading-reloxed text-xl text-white">
                         <p>AtCoder Random Contest へようこそ！</p>
                         <p>下記の中からお好みのランダムコンテストに参加してください</p>
                     </div>
@@ -168,7 +170,7 @@ export default function AtCoderPage() {
                 </div>
             </div>
             {flag && (
-                <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-white bg-opacity-75">
+                <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white bg-opacity-75">
                     <Spinner />
                     <div className="">通信中</div>
                 </div>
