@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-5itm-6gmb%ax4+%1!fb#cr6p15*a%lx-!m!+6dszu68hwt)r*!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost",
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'atcoder.apps.AtcoderConfig',
     'search.apps.SearchConfig',
+    'pixelalchemy.apps.PixelalchemyConfig',
     'rest_framework',
     'corsheaders',
 ]
@@ -62,6 +63,8 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
+    "https://wisteria-bloom.wisteria-io.com",
+    "https://wisteria-bloom-production.up.railway.app",
 ]
 
 ROOT_URLCONF = 'wisteriabloom.urls'
