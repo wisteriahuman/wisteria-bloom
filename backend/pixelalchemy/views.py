@@ -7,7 +7,7 @@ import io
 import svgwrite
 import cairosvg
 
-class PNGToJPEGView(APIView):
+class PNGToJPGView(APIView):
     def post(self, request):
         image = Image.open(request.FILES["png"])
         if image.format != "PNG":
@@ -16,11 +16,11 @@ class PNGToJPEGView(APIView):
         byte_io = io.BytesIO()
         image.save(byte_io, format="JPEG")
         res = base64.b64encode(byte_io.getvalue()).decode("ascii")
-        return Response({"jpeg": res})
+        return Response({"jpg": res})
 
-class JPEGToPNGView(APIView):
+class JPGToPNGView(APIView):
     def post(self, request):
-        image = Image.open(request.FILES["jpeg"])
+        image = Image.open(request.FILES["jpg"])
         if image.format != "JPEG":
             raise ValidationError("Image is not in JPEG format")
         image = image.convert("RGB")
@@ -45,9 +45,9 @@ class PNGToSVGView(APIView):
         res = xml_declaration + svg_content
         return Response({"svg": res})
 
-class JPEGToSVGView(APIView):
+class JPGToSVGView(APIView):
     def post(self, request):
-        image = Image.open(request.FILES["jpeg"])
+        image = Image.open(request.FILES["jpg"])
         if image.format != "JPEG":
             raise ValidationError("Image is not in JPEG format")
         in_byte_io = io.BytesIO()
@@ -55,7 +55,7 @@ class JPEGToSVGView(APIView):
         img = base64.b64encode(in_byte_io.getvalue()).decode("ascii")
         width, height = image.size
         dwg = svgwrite.Drawing(size=(width, height))
-        dwg.add(dwg.image(f"data:image/jpeg;base64,{img}", insert=(0, 0), size=(width, height)))
+        dwg.add(dwg.image(f"data:image/jpg;base64,{img}", insert=(0, 0), size=(width, height)))
         svg_content = dwg.tostring()
         xml_declaration = '<?xml version="1.0" encoding="utf-8" ?>\n'
         res = xml_declaration + svg_content
