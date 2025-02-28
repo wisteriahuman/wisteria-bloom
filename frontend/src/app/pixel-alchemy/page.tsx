@@ -70,6 +70,24 @@ export default function PixelAlchemy() {
                             onClick={() => router.push("/pixel-alchemy/png-to-jpg")}
                             />
                     </div>
+                    <div className="p-4 lg:w-1/4">
+                        <ToolCard
+                            title="PNG to SVG"
+                            description="PNG形式の画像をSVG形式に変換します。"
+                            onMouseEnter={() => console.log("Mouse Enter")}
+                            onMouseLeave={() => console.log("Mouse Leave")}
+                            onClick={() => router.push("/pixel-alchemy/png-to-svg")}
+                            />
+                    </div>
+                    <div className="p-4 lg:w-1/4">
+                        <ToolCard
+                            title="JPG to SVG"
+                            description="JPG形式の画像をSVG形式に変換します。"
+                            onMouseEnter={() => console.log("Mouse Enter")}
+                            onMouseLeave={() => console.log("Mouse Leave")}
+                            onClick={() => router.push("/pixel-alchemy/jpg-to-svg")}
+                        />
+                    </div>
                 </div>
             </div>
         </section>

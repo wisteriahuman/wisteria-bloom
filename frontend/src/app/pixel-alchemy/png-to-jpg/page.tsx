@@ -166,7 +166,7 @@ export default function PNGToJPG() {
             {flag && (
                 <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white bg-opacity-75">
                     <Spinner />
-                    <div className="">通信中</div>
+                    <div>通信中</div>
                 </div>
             )}
         </section>
