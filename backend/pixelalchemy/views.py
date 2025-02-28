@@ -107,8 +107,21 @@ class JPGToPDFView(APIView):
         jpg_image = Image.open(jpg_io)
         if jpg_image.format != "JPEG":
             raise ValidationError("Image is not in JPEG format")
+        
+        if hasattr(jpg_image, '_getexif') and jpg_image._getexif() is not None:
+            exif = dict(jpg_image._getexif().items())
+            orientation = exif.get(0x0112, 1)
+            
+            if orientation == 3:
+                jpg_image = jpg_image.rotate(180, expand=True)
+            elif orientation == 6:
+                jpg_image = jpg_image.rotate(270, expand=True)
+            elif orientation == 8:
+                jpg_image = jpg_image.rotate(90, expand=True)
+                
         width, height = jpg_image.size
         aspect_ratio = width / height
+        
         pdf = FPDF()
         pdf.add_page()
         page_width = 210
@@ -147,6 +160,18 @@ class PNGToPDFView(APIView):
         png_image = Image.open(png_io)
         if png_image.format != "PNG":
             raise ValidationError("Image is not in PNG format")
+        
+        if hasattr(png_image, '_getexif') and png_image._getexif() is not None:
+            exif = dict(png_image._getexif().items())
+            orientation = exif.get(0x0112, 1)
+            
+            if orientation == 3:
+                png_image = png_image.rotate(180, expand=True)
+            elif orientation == 6:
+                png_image = png_image.rotate(270, expand=True)
+            elif orientation == 8:
+                png_image = png_image.rotate(90, expand=True)
+                
         width, height = png_image.size
         aspect_ratio = width / height
         
