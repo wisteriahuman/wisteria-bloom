@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.exceptions import ValidationError
 from PIL import Image
+from fpdf import FPDF
 import base64
 import io
 import svgwrite
@@ -63,9 +64,75 @@ class JPGToSVGView(APIView):
 
 class SVGToPNGView(APIView):
     def post(self, request):
-        svg_content = request.data["svg"]
+        svg_content = Image.open(request.FILES["svg"])
+        if svg_content.format != "SVG":
+            raise ValidationError("Image is not in SVG format")
         svg_content = svg_content.encode("utf-8")
         byte_io = io.BytesIO()
         cairosvg.svg2png(bytestring=svg_content, write_to=byte_io)
         res = base64.b64encode(byte_io.getvalue()).decode("ascii")
         return Response({"png": res})
+
+
+class SVGToJPGView(APIView):
+    def post(self, request):
+        svg_content = Image.open(request.FILES["svg"])
+        if svg_content.format != "SVG":
+            raise ValidationError("Image is not in SVG format")
+        svg_content = svg_content.encode("utf-8")
+        byte_io = io.BytesIO()
+        cairosvg.svg2png(bytestring=svg_content, write_to=byte_io)
+        res = base64.b64encode(byte_io.getvalue()).decode("ascii")
+        return Response({"jpg": res})
+
+class JPGToPDFView(APIView):
+    def post(self, request):
+        jpg_content = Image.open(request.FILES["jpg"])
+        if jpg_content.format != "JPEG":
+            raise ValidationError("Image is not in JPEG format")
+        width, height = jpg_content.size
+        aspect_ratio = width / height
+        pdf = FPDF()
+        pdf.add_page()
+        page_width = 170
+        page_height = 257
+        
+        if aspect_ratio > 1:
+            w = page_width
+            h = page_width / aspect_ratio
+        else:
+            h = page_height
+            w = page_height * aspect_ratio
+        x = (page_width - w) / 2
+        y = (page_height - h) / 2
+        pdf.image(jpg_content, x=x, y=y, w=w, h=h)
+        byte_io = io.BytesIO()
+        pdf.output(byte_io)
+        res = base64.b64encode(byte_io.getvalue()).decode("ascii")
+        return Response({"pdf": res})
+
+class PNGToPDFView(APIView):
+    def post(self, request):
+        png_content = Image.open(request.FILES["png"])
+        if png_content.format != "PNG":
+            raise ValidationError("Image is not in PNG format")
+        width, height = png_content.size
+        aspect_ratio = width / height
+        pdf = FPDF()
+        pdf.add_page()
+        page_width = 170
+        page_height = 257
+        
+        if aspect_ratio > 1:
+            w = page_width
+            h = page_width / aspect_ratio
+        else:
+            h = page_height
+            w = page_height * aspect_ratio
+        x = (page_width - w) / 2
+        y = (page_height - h) / 2
+        pdf.image(png_content, x=x, y=y, w=w, h=h)
+        byte_io = io.BytesIO()
+        pdf.output(byte_io)
+        res = base64.b64encode(byte_io.getvalue()).decode("ascii")
+        return Response({"pdf": res})

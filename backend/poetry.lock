@@ -223,6 +223,17 @@ files = [
 django = ">=4.2"
 
 [[package]]
+name = "fpdf"
+version = "1.7.2"
+description = "Simple PDF generation for Python"
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "fpdf-1.7.2.tar.gz", hash = "sha256:125840783289e7d12552b1e86ab692c37322e7a65b96a99e0ea86cca041b6779"},
+]
+
+[[package]]
 name = "pillow"
 version = "11.1.0"
 description = "Python Imaging Library (Fork)"
@@ -398,4 +409,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12"
-content-hash = "5768c9ccaddff425c8a21fafeb9405eeb024ff61bf99cf4fa93bf364414fa6fc"
+content-hash = "74389bcf9245e0f0942384de25385fa0e7d36b8516ab20f02cf57cc499e96a75"
