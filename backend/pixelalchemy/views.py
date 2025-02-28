@@ -7,6 +7,8 @@ import base64
 import io
 import svgwrite
 import cairosvg
+import tempfile
+import os
 
 class PNGToJPGView(APIView):
     def post(self, request):
@@ -101,7 +103,8 @@ class JPGToPDFView(APIView):
     def post(self, request):
         jpg_file = request.FILES["jpg"]
         jpg_bytes = jpg_file.read()
-        jpg_image = Image.open(jpg_file)
+        jpg_io = io.BytesIO(jpg_bytes)
+        jpg_image = Image.open(jpg_io)
         if jpg_image.format != "JPEG":
             raise ValidationError("Image is not in JPEG format")
         width, height = jpg_image.size
@@ -119,7 +122,12 @@ class JPGToPDFView(APIView):
             w = page_height * aspect_ratio
         x = (page_width - w) / 2
         y = (page_height - h) / 2
-        pdf.image(jpg_bytes, x=x, y=y, w=w, h=h)
+        
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
+            temp_file.write(jpg_bytes)
+            temp_file_path = temp_file.name
+        
+        pdf.image(temp_file_path, x=x, y=y, w=w, h=h)
         byte_io = io.BytesIO()
         pdf.output(byte_io)
         res = base64.b64encode(byte_io.getvalue()).decode("ascii")
@@ -129,7 +137,8 @@ class PNGToPDFView(APIView):
     def post(self, request):
         png_file = request.FILES["png"]
         png_bytes = png_file.read()
-        png_image = Image.open(png_file)
+        png_io = io.BytesIO(png_bytes)
+        png_image = Image.open(png_io)
         if png_image.format != "PNG":
             raise ValidationError("Image is not in PNG format")
         width, height = png_image.size
@@ -148,7 +157,13 @@ class PNGToPDFView(APIView):
             w = page_height * aspect_ratio
         x = (page_width - w) / 2
         y = (page_height - h) / 2
-        pdf.image(png_bytes, x=x, y=y, w=w, h=h)
+        
+        with tempfile.NamedTemporaryFile(deleate=False, suffix=".png") as temp_file:
+            temp_file.write(png_bytes)
+            temp_file_path = temp_file.name
+
+        pdf.image(temp_file_path, x=x, y=y, w=w, h=h)
+        os.unlink(temp_file_path)
         byte_io = io.BytesIO()
         pdf.output(byte_io)
         res = base64.b64encode(byte_io.getvalue()).decode("ascii")
