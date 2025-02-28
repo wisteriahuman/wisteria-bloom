@@ -111,8 +111,8 @@ class JPGToPDFView(APIView):
         aspect_ratio = width / height
         pdf = FPDF()
         pdf.add_page()
-        page_width = 170
-        page_height = 257
+        page_width = 210
+        page_height = 297
         
         if aspect_ratio > 1:
             w = page_width
@@ -152,8 +152,8 @@ class PNGToPDFView(APIView):
         
         pdf = FPDF()
         pdf.add_page()
-        page_width = 170
-        page_height = 257
+        page_width = 210
+        page_height = 297
         
         if aspect_ratio > 1:
             w = page_width
