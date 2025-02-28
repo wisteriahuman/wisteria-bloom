@@ -64,26 +64,38 @@ class JPGToSVGView(APIView):
 
 class SVGToPNGView(APIView):
     def post(self, request):
-        svg_content = Image.open(request.FILES["svg"])
-        if svg_content.format != "SVG":
-            raise ValidationError("Image is not in SVG format")
-        svg_content = svg_content.encode("utf-8")
-        byte_io = io.BytesIO()
-        cairosvg.svg2png(bytestring=svg_content, write_to=byte_io)
-        res = base64.b64encode(byte_io.getvalue()).decode("ascii")
-        return Response({"png": res})
-
+        try:
+            svg_file = Image.open(request.FILES["svg"])
+            svg_content = svg_file.read()
+            
+            if not svg_content.startswith(b'<?xml') and not svg_content.startswith(b'<svg'):
+                raise ValidationError("Image is not in SVG format")
+            
+            byte_io = io.BytesIO()
+            cairosvg.svg2png(bytestring=svg_content, write_to=byte_io)
+            res = base64.b64encode(byte_io.getvalue()).decode("ascii")
+            return Response({"png": res})
+        except Exception as e:
+            raise ValidationError(f"SVG to PNG conversion failed: {e}")
 
 class SVGToJPGView(APIView):
     def post(self, request):
-        svg_content = Image.open(request.FILES["svg"])
-        if svg_content.format != "SVG":
-            raise ValidationError("Image is not in SVG format")
-        svg_content = svg_content.encode("utf-8")
-        byte_io = io.BytesIO()
-        cairosvg.svg2png(bytestring=svg_content, write_to=byte_io)
-        res = base64.b64encode(byte_io.getvalue()).decode("ascii")
-        return Response({"jpg": res})
+        try:
+            svg_file = Image.open(request.FILES["svg"])
+            svg_content = svg_file.read()
+            
+            if not svg_content.startswith(b'<?xml') and not svg_content.startswith(b'<svg'):
+                raise ValidationError("Image is not in SVG format")
+            
+            byte_io = io.BytesIO()
+            cairosvg.svg2png(bytestring=svg_content, write_to=byte_io)
+            image = Image.open(byte_io)
+            byte_io = io.BytesIO()
+            image.save(byte_io, format="JPEG")
+            res = base64.b64encode(byte_io.getvalue()).decode("ascii")
+            return Response({"jpg": res})
+        except Exception as e:
+            raise ValidationError(f"SVG to JPG conversion failed: {e}")
 
 class JPGToPDFView(APIView):
     def post(self, request):
