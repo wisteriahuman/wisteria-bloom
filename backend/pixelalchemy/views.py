@@ -123,7 +123,7 @@ class JPGToPDFView(APIView):
         x = (page_width - w) / 2
         y = (page_height - h) / 2
         
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as temp_file:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
             temp_file.write(jpg_bytes)
             temp_file_path = temp_file.name
 
