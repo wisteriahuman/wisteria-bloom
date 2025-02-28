@@ -123,14 +123,20 @@ class JPGToPDFView(APIView):
         x = (page_width - w) / 2
         y = (page_height - h) / 2
         
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as temp_file:
             temp_file.write(jpg_bytes)
             temp_file_path = temp_file.name
-        
+
         pdf.image(temp_file_path, x=x, y=y, w=w, h=h)
-        byte_io = io.BytesIO()
-        pdf.output(byte_io)
-        res = base64.b64encode(byte_io.getvalue()).decode("ascii")
+        os.unlink(temp_file_path)
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf_file:
+            pdf_path = temp_pdf_file.name
+        pdf.output(pdf_path)
+        with open(pdf_path, "rb") as f:
+            pdf_bytes = f.read()
+        os.unlink(pdf_path)
+        
+        res = base64.b64encode(pdf_bytes).decode("ascii")
         return Response({"pdf": res})
 
 class PNGToPDFView(APIView):
@@ -158,13 +164,18 @@ class PNGToPDFView(APIView):
         x = (page_width - w) / 2
         y = (page_height - h) / 2
         
-        with tempfile.NamedTemporaryFile(deleate=False, suffix=".png") as temp_file:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as temp_file:
             temp_file.write(png_bytes)
             temp_file_path = temp_file.name
 
         pdf.image(temp_file_path, x=x, y=y, w=w, h=h)
         os.unlink(temp_file_path)
-        byte_io = io.BytesIO()
-        pdf.output(byte_io)
-        res = base64.b64encode(byte_io.getvalue()).decode("ascii")
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf_file:
+            pdf_path = temp_pdf_file.name
+        pdf.output(pdf_path)
+        with open(pdf_path, "rb") as f:
+            pdf_bytes = f.read()
+        os.unlink(pdf_path)
+        
+        res = base64.b64encode(pdf_bytes).decode("ascii")
         return Response({"pdf": res})
