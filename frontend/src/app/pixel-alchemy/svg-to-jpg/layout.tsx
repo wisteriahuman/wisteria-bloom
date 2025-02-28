@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     description: "Convert your SVG images to JPG format",
     openGraph: {
         title: "SVG to JPG Converter",
-        description: "Convert your SVG images to PNG format",
+        description: "Convert your SVG images to JPG format",
         siteName: "Wisteria Bloom",
         type: "website",
         images: ["/images/wisteria_bloom.svg"]

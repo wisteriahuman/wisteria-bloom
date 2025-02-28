@@ -117,6 +117,15 @@ export default function PixelAlchemy() {
                             onClick={() => router.push("/pixel-alchemy/png-to-pdf")}
                         />
                     </div>
+                    <div className="p-4 lg:w-1/4">
+                        <ToolCard
+                            title="JPG to PDF"
+                            description="JPG形式の画像をPDF形式に変換します。"
+                            onMouseEnter={() => console.log("Mouse Enter")}
+                            onMouseLeave={() => console.log("Mouse Leave")}
+                            onClick={() => router.push("/pixel-alchemy/jpg-to-pdf")}
+                        />
+                    </div>
                 </div>
             </div>
         </section>
