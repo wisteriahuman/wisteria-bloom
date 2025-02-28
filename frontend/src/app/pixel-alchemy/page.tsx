@@ -89,6 +89,35 @@ export default function PixelAlchemy() {
                         />
                     </div>
                 </div>
+                <div className="flex flex-wrap -m-4">
+                    <div className="p-4 lg:w-1/4">
+                        <ToolCard
+                            title="SVG to PNG"
+                            description="SVG形式の画像をPNG形式に変換します。"
+                            onMouseEnter={() => console.log("Mouse Enter")}
+                            onMouseLeave={() => console.log("Mouse Leave")}
+                            onClick={() => router.push("/pixel-alchemy/svg-to-png")}
+                        />
+                    </div>
+                    <div className="p-4 lg:w-1/4">
+                        <ToolCard
+                            title="SVG to JPG"
+                            description="SVG形式の画像をJPG形式に変換します。"
+                            onMouseEnter={() => console.log("Mouse Enter")}
+                            onMouseLeave={() => console.log("Mouse Leave")}
+                            onClick={() => router.push("/pixel-alchemy/svg-to-jpg")}
+                        />
+                    </div>
+                    <div className="p-4 lg:w-1/4">
+                        <ToolCard
+                            title="PNG_to_PDF"
+                            description="PNG形式の画像をPDF形式に変換します。"
+                            onMouseEnter={() => console.log("Mouse Enter")}
+                            onMouseLeave={() => console.log("Mouse Leave")}
+                            onClick={() => router.push("/pixel-alchemy/png-to-pdf")}
+                        />
+                    </div>
+                </div>
             </div>
         </section>
     );

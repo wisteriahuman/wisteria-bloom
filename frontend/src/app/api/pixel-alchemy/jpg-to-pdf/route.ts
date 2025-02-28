@@ -4,14 +4,14 @@ import { SERVERURL } from "@/common/urls";
 export async function POST(request: NextRequest) {
     try {
         const formData = await request.formData();
-        const res = await fetch(`${SERVERURL}api/pixel-alchemy/jpg-to-png/`, {
+        const res = await fetch(`${SERVERURL}api/pixel-alchemy/jpg-to-pdf/`, {
             method: "POST",
             body: formData,
         });
         const data = await res.json();
         return NextResponse.json({
             status: 200,
-            png: data.png,
+            pdf: data.pdf,
         });
     } catch (error) {
         console.error("Error fetching data:", error);
