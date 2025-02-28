@@ -104,6 +104,8 @@ class JPGToPDFView(APIView):
             raise ValidationError("Image is not in JPEG format")
         width, height = jpg_content.size
         aspect_ratio = width / height
+        temp_img_io = io.BytesIO()
+        jpg_content.save(temp, format="JPEG")
         pdf = FPDF()
         pdf.add_page()
         page_width = 170
@@ -117,7 +119,8 @@ class JPGToPDFView(APIView):
             w = page_height * aspect_ratio
         x = (page_width - w) / 2
         y = (page_height - h) / 2
-        pdf.image(jpg_content, x=x, y=y, w=w, h=h)
+        temp_file_name = "temp_image.jpg"
+        pdf.image(name=temp_file_name, x=x, y=y, w=w, h=h, type='', data=temp_img_io.getvalue())
         byte_io = io.BytesIO()
         pdf.output(byte_io)
         res = base64.b64encode(byte_io.getvalue()).decode("ascii")
@@ -125,11 +128,13 @@ class JPGToPDFView(APIView):
 
 class PNGToPDFView(APIView):
     def post(self, request):
-        png_content = Image.open(request.FILES["png"])
+        png_content = request.FILES["png"]
         if png_content.format != "PNG":
             raise ValidationError("Image is not in PNG format")
         width, height = png_content.size
         aspect_ratio = width / height
+        temp_img_io = io.BytesIO()
+        png_content.save(temp_img_io, format="PNG")
         pdf = FPDF()
         pdf.add_page()
         page_width = 170
@@ -143,7 +148,8 @@ class PNGToPDFView(APIView):
             w = page_height * aspect_ratio
         x = (page_width - w) / 2
         y = (page_height - h) / 2
-        pdf.image(png_content, x=x, y=y, w=w, h=h)
+        temp_file_name = "temp_image.png"
+        pdf.image(name=temp_file_name, x=x, y=y, w=w, h=h, type='', data=temp_img_io.getvalue())
         byte_io = io.BytesIO()
         pdf.output(byte_io)
         res = base64.b64encode(byte_io.getvalue()).decode("ascii")
