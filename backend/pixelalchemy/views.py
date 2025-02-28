@@ -65,7 +65,7 @@ class JPGToSVGView(APIView):
 class SVGToPNGView(APIView):
     def post(self, request):
         try:
-            svg_file = Image.open(request.FILES["svg"])
+            svg_file = request.FILES["svg"]
             svg_content = svg_file.read()
             
             if not svg_content.startswith(b'<?xml') and not svg_content.startswith(b'<svg'):
@@ -81,7 +81,7 @@ class SVGToPNGView(APIView):
 class SVGToJPGView(APIView):
     def post(self, request):
         try:
-            svg_file = Image.open(request.FILES["svg"])
+            svg_file = request.FILES["svg"]
             svg_content = svg_file.read()
             
             if not svg_content.startswith(b'<?xml') and not svg_content.startswith(b'<svg'):
