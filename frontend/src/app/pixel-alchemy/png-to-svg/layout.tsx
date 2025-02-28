@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
     metadataBase: new URL("https://wisteria-bloom.wisteria-io.com"),
     title: "PNG to SVG Converter",
-    description: "Convert your PNG images to JPG format",
+    description: "Convert your PNG images to SVG format",
     openGraph: {
         title: "PNG to SVG Converter",
         description: "Convert your PNG images to SVG format",
