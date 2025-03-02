@@ -6,14 +6,15 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Wisteria Bloom",
   description: `
-  Wisteria BloomはWisteriaの個人サイトです。
-  学習者向けの学習ツールやリソースも提供しています。
+  Wisteria Bloomは学習リソース・ツールを提供するサイトです。
+  学習の助けになるアプリなどを提供しています。
   `.trim(),
+  metadataBase: new URL("https://wisteria-bloom.wisteria-io.com"),
   openGraph: {
     title: "Wisteria Bloom",
     description: `
-    Wisteria BloomはWisteriaの個人サイトです。
-    学習者向けの学習ツールやリソースも提供しています。
+    Wisteria Bloomは学習リソース・ツールを提供するサイトです。
+    学習の助けになるアプリなどを提供しています。
     `.trim(),
     siteName: "Wisteria Bloom",
     type: "website",

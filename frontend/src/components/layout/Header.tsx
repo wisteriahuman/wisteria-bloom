@@ -30,8 +30,8 @@ export default function Header() {
                     <Image
                         alt="wisteria_bloom"
                         src="/images/wisteria_bloom.svg"
-                        width={150}
-                        height={50}
+                        width={100}
+                        height={100}
                         style={{ width: "auto", height: "70px"}}
                     />
                 </div>
