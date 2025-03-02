@@ -3,6 +3,7 @@
 import "@/app/globals.css";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
 
@@ -16,6 +17,8 @@ export default function Home() {
   ]
 
   const [index, setIndex] = useState(0);
+  const [showCourses, setShowCourses] = useState(false);
+  const [showTools, setShowTools] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -75,8 +78,10 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="absolute right-0 bottom-0 md:bottom-auto md:top-[245px] flex text-white text-2xl md:text-3xl">
-          <a className="bg-black hover:bg-gray-900 p-2 md:p-6 w-24 md:w-40 text-center border-r border-white" href="about">About</a>
+      <div className="absolute right-0 top-0 md:top-[245px] flex text-white text-2xl md:text-3xl">
+          <a className="bg-black hover:bg-gray-900 p-2 md:p-6 w-24 md:w-40 text-center border-r border-white" href="about">
+            About
+          </a>
           <a
             className="bg-black hover:bg-gray-900 p-2 md:p-6 w-24 md:w-40 text-center"
             href={getTweetUrl()}
@@ -97,17 +102,55 @@ export default function Home() {
           あなたの学びをサポートする学習リソース・ツールの提供サイト
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 w-full">
-          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+        <div className="flex flex-col md:flex-row gap-6 mt-8 w-full md:items-start">
+          <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
             <h3 className="text-xl font-semibold text-purple-600 mb-3">Courses</h3>
             <p className="text-gray-600">授業やAtCoderなど、さまざまな学習コースを提供しています。</p>
+            <button
+              className="w-full bg-gray-200 mt-5 hover:bg-gray-300 border-b border-black active:bg-gray-400 p-1"
+              onClick={() => setShowCourses(prev => !prev)}
+            >
+              コース一覧
+            </button>
+            {showCourses && (
+              <ul className="mt-4 bg-white rounded-lg border border-gray-100 shadow-lg overflow-hidden transition-all duration-300 ease-in-out">
+                    <li className="border-b border-gray-100 last:border-b-0 transition-colors hover:bg-purple-50">
+                        <Link
+                          className="flex py-3 px-4 text-gray-700 hover:text-purple-600 transition-colors items-center"
+                          href="/atcoder"
+                        >
+                          <span className="w-2 h-2 rounded-full bg-purple-400 mr-2"></span>
+                          AtCoder
+                        </Link>
+                    </li>
+              </ul>
+            )}
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+          <div className="w-full mb-6 md:w-1/2 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
             <h3 className="text-xl font-semibold text-purple-600 mb-3">Tools</h3>
             <p className="text-gray-600">
               学習をより効率的にするツールを提供しています。
             </p>
+            <button
+              className="w-full bg-gray-200 mt-5 hover:bg-gray-300 border-b border-black active:bg-gray-400 p-1"
+              onClick={() => setShowTools(prev => !prev)}
+            >
+              ツール一覧
+            </button>
+            {showTools && (
+              <ul className="mt-4 bg-white rounded-lg border border-gray-100 shadow-lg overflow-hidden transition-all duration-300 ease-in-out">
+                    <li className="border-b border-gray-100 last:border-b-0 transition-colors hover:bg-purple-50">
+                        <Link
+                          className="flex py-3 px-4 text-gray-700 hover:text-purple-600 transition-colors items-center"
+                          href="/pixel-alchemy"
+                        >
+                          <span className="w-2 h-2 rounded-full bg-purple-400 mr-2"></span>
+                          Pixel Alchemy
+                        </Link>
+                    </li>
+              </ul>
+            )}
           </div>
         </div>
       </div>

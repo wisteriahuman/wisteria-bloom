@@ -57,7 +57,7 @@ export default function Header() {
                                     </div>
                                     <ul className={`dropdown-content absolute left-0 right-0 z-[1000] mt-0 rounded-md w-max border-none bg-white bg-clip-padding shadow-lg ${isCoursesOpen ? "" : "hidden"}`}>
                                         <li className="dropdown">
-                                            <Link className="w-52 no-underline flex items-center hover:text-accent py-3 px-4 hover:underline" href="/atcoder">AtCoder Random Contest</Link>
+                                            <Link className="w-52 no-underline flex items-center hover:text-accent py-3 px-4 hover:underline" href="/atcoder">AtCoder</Link>
                                         </li>
                                     </ul>
                                 </button>
@@ -165,7 +165,7 @@ export default function Header() {
                                     <li
                                         className="pl-3 border-l-2 border-black py-2"
                                     >
-                                        <Link href="/atcoder" className="hover:underline">AtCoder Random Contest</Link>
+                                        <Link href="/atcoder" className="hover:underline">AtCoder</Link>
                                     </li>
                                 </ul>
                             </li>
