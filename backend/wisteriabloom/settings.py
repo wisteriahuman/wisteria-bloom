@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'atcoder.apps.AtcoderConfig',
     'search.apps.SearchConfig',
     'pixelalchemy.apps.PixelalchemyConfig',
+    'authentication.apps.AuthenticationConfig',
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
