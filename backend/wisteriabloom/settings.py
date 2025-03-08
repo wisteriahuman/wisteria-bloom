@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
-GOOGLE_SECRET = os.environ.get('GOOGLE_SECRET')
+GOOGLE_SECRET_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -87,7 +87,7 @@ SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
             'client_id': os.environ.get('GOOGLE_CLIENT_ID'),
-            'secret': os.environ.get('GOOGLE_SECRET'),
+            'secret': os.environ.get('GOOGLE_CLIENT_SECRET'),
             'key': ''
         },
         'SCOPE': [
