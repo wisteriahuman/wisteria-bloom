@@ -2,13 +2,21 @@
 
 import "@/app/globals.css";
 import { useState, useEffect } from 'react';
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ToolCard from "@/components/pixel-alchemy/ToolCard";
 
 export default function PixelAlchemy() {
+    const { status } = useSession();
+    const router = useRouter();
     const [isClosedDoor, setIsClosedDoor] = useState(true);
     const [isCracked, setIsCracked] = useState(false);
-    const router = useRouter();
+
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            router.push("/auth/signin?callbackUrl=" + encodeURIComponent(window.location.href));
+        }
+    }, [status, router]);
 
     useEffect(() => {
         const crackTimer = setTimeout(() => {
@@ -22,6 +30,10 @@ export default function PixelAlchemy() {
             clearTimeout(doorTimer);
         };
     }, []);
+
+    if (status === "loading") {
+        return <div className="min-h-screen flex items-center justify-center">読み込み中...</div>;
+    }
 
     return (
         <section className="relative text-gray-600 body-font">
