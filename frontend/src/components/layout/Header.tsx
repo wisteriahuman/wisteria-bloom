@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import { AuthButton } from '@/components/auth/AuthButton';
 
 
 export default function Header() {
@@ -26,6 +27,9 @@ export default function Header() {
     return (
         <header className="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[60] w-full bg-white border-b text-sm py-2.5">
             <nav className="px-4 sm:px-6 flex basis-full items-center w-full mx-auto">
+                <div className="mr-5 flex items-center">
+                    <AuthButton />
+                </div>
                 <div className="mr-5 flex items-center">
                     <Image
                         alt="wisteria_bloom"
@@ -196,6 +200,9 @@ export default function Header() {
                                         <Link href="/pixel-alchemy" className="hover:underline">Pixel Alchemy</Link>
                                     </li>
                                 </ul>
+                            </li>
+                            <li className="py-4 border-b-2 border-black">
+                                <AuthButton />
                             </li>
                         </ul>
                     </div>
