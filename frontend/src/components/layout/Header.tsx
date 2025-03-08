@@ -27,7 +27,7 @@ export default function Header() {
     return (
         <header className="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[60] w-full bg-white border-b text-sm py-2.5">
             <nav className="px-4 sm:px-6 flex basis-full items-center w-full mx-auto">
-                <div className="mr-5 flex items-center">
+                <div className="mr-5 hidden md:flex items-center">
                     <AuthButton />
                 </div>
                 <div className="mr-5 flex items-center">
