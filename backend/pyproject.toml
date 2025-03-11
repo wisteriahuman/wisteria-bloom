@@ -19,7 +19,9 @@ dependencies = [
     "djangorestframework-simplejwt (>=5.5.0,<6.0.0)",
     "google-auth (>=2.38.0,<3.0.0)",
     "python-dotenv (>=1.0.1,<2.0.0)",
-    "requests (>=2.32.3,<3.0.0)"
+    "requests (>=2.32.3,<3.0.0)",
+    "pyjwt (>=1.7.1,<2.10.0)",
+    "cryptography (>=44.0.2,<45.0.0)"
 ]
 
 

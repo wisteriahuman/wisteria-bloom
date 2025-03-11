@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
-GOOGLE_SECRET_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
+GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -115,7 +115,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "https://wisteria-bloom.wisteria-io.com",
-    "https://wisteria-bloom.vercel.app"
+    "https://wisteria-bloom.vercel.app",
     "https://wisteria-bloom-production.up.railway.app",
 ]
 
