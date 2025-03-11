@@ -115,6 +115,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "https://wisteria-bloom.wisteria-io.com",
+    "https://wisteria-bloom.vercel.app"
     "https://wisteria-bloom-production.up.railway.app",
 ]
 
