@@ -18,7 +18,8 @@ dependencies = [
     "django-allauth (>=65.4.1,<66.0.0)",
     "djangorestframework-simplejwt (>=5.5.0,<6.0.0)",
     "google-auth (>=2.38.0,<3.0.0)",
-    "python-dotenv (>=1.0.1,<2.0.0)"
+    "python-dotenv (>=1.0.1,<2.0.0)",
+    "requests (>=2.32.3,<3.0.0)"
 ]
 
 
