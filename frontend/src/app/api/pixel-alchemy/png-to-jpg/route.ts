@@ -4,7 +4,7 @@ import { SERVERURL } from "@/common/urls";
 export async function POST(request: NextRequest) {
     try {
         const formData = await request.formData();
-        const res = await fetch(`${SERVERURL}api/pixel-alchemy/png-to-jpg/`, {
+        const res = await fetch(`${SERVERURL}/api/pixel-alchemy/png-to-jpg/`, {
             method: "POST",
             body: formData,
         });

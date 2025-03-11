@@ -5,7 +5,7 @@ export async function GET(request: NextRequest) {
     try {
         const { searchParams } = request.nextUrl;
         const query = searchParams.get('q') || '';
-        const res = await fetch(`${SERVERURL}api/pages/search/?q=${query}`, {
+        const res = await fetch(`${SERVERURL}/api/pages/search/?q=${query}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

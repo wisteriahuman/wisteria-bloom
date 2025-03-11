@@ -3,7 +3,7 @@ import { SERVERURL } from "@/common/urls";
 
 export async function GET() {
     try {
-        const res = await fetch(`${SERVERURL}api/atcoder/`, {
+        const res = await fetch(`${SERVERURL}/api/atcoder/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

@@ -1,1 +1,1 @@
-export const SERVERURL = process.env.BACKEND_URL || "http://localhost:8000/";
+export const SERVERURL = process.env.BACKEND_URL || "http://localhost:8000";
