@@ -5,7 +5,7 @@ import { SERVERURL } from '@/common/urls';
 export async function GET(request: NextRequest, context: { params: Promise<{ problem_id: string }> }) {
     try {
         const { problem_id } = await context.params;
-        const res = await fetch(`${SERVERURL}api/atcoder/${problem_id}`, {
+        const res = await fetch(`${SERVERURL}/api/atcoder/${problem_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
