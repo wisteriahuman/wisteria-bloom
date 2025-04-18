@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    command: pnpm next dev
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - wisteria-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: poetry run python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - wisteria-network
+
+  db:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: your_db_user
+      POSTGRES_PASSWORD: your_db_password
+      POSTGRES_DB: your_db_name
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - wisteria-network
+
+networks:
+  wisteria-network:
+    driver: bridge
+
+volumes:
+  db_data:
