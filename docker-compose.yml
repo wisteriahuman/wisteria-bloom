@@ -38,6 +38,7 @@ services:
 
 networks:
   wisteria-network:
+    external: true
     driver: bridge
 
 volumes:
